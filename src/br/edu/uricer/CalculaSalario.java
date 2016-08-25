@@ -6,55 +6,51 @@ public class CalculaSalario {
 
     private final BigDecimal DESCONTO_DE_30 = new BigDecimal("0.30");
     private final BigDecimal DESCONTO_DE_25 = new BigDecimal("0.25");
-    private final BigDecimal DESCONTO_DE_20 = new BigDecimal("0.2");
+    private final BigDecimal DESCONTO_DE_20 = new BigDecimal("0.20");
     private final BigDecimal DESCONTO_DE_15 = new BigDecimal("0.15");
-    private final BigDecimal DESCONTO_DE_10 = new BigDecimal("0.1");
-    private final BigDecimal SALARIO_BASE_DESENVOLVEDOR = new BigDecimal("3000.0");
-    private final BigDecimal SALARIO_BASE_GERENTE = new BigDecimal("5000.0");
-    private final BigDecimal SALARIO_BASE_DBA = new BigDecimal("2000.0");
-    private final BigDecimal SALARIO_BASE_TESTADOR = new BigDecimal("2000.0");
-    
-    public BigDecimal salario;
-    String cargo;
+    private final BigDecimal DESCONTO_DE_10 = new BigDecimal("0.10");
+    private final BigDecimal SALARIO_BASE_DESENVOLVEDOR = new BigDecimal("3000");
+    private final BigDecimal SALARIO_BASE_GERENTE = new BigDecimal("5000");
+    private final BigDecimal SALARIO_BASE_DBA = new BigDecimal("2000");
+    private final BigDecimal SALARIO_BASE_TESTADOR = new BigDecimal("2000");
 
-    public CalculaSalario(BigDecimal salario, String cargo) {
-        this.salario = salario;
-        this.cargo = cargo;
+
+    public CalculaSalario () {
     }
 
-    public BigDecimal usaCargo() {
+    public BigDecimal calculaSalario(String cargo, BigDecimal salario) {
         switch (cargo) {
             case "DESENVOLVEDOR":
-                return calculaDesenvolvedor();
+                return calculaDesenvolvedor(salario);
             case "GERENTE":
-                return calculaGerente();
+                return calculaGerente(salario);
             case "DBA":
-                return calculaDBA();
+                return calculaDBA(salario);          
             case "TESTADOR":
-                return calculaTestador();
+                return calculaTestador(salario); 
             default:
                 System.out.println("DIGITE O CARGO CORRETAMENTE");
-                return new BigDecimal(0);
+                return new BigDecimal ("0");
         }
     }
 
-    private BigDecimal calculaDesenvolvedor() {
-        if (salario.compareTo(SALARIO_BASE_DESENVOLVEDOR) >= 0) {            
+    private BigDecimal calculaDesenvolvedor(BigDecimal salario) {    
+        if (salario.compareTo(SALARIO_BASE_DESENVOLVEDOR) >= 0) {
             return salario.subtract(salario.multiply(DESCONTO_DE_20));
         } else {
             return salario.subtract(salario.multiply(DESCONTO_DE_10));
         }
     }
 
-    private BigDecimal calculaGerente() {
+    private BigDecimal calculaGerente(BigDecimal salario) {
         if (salario.compareTo(SALARIO_BASE_GERENTE) >= 0) {
-            return salario.multiply(DESCONTO_DE_30);
+            return salario.subtract(salario.multiply(DESCONTO_DE_30));
         } else {
-            return salario.multiply(DESCONTO_DE_20);
+            return salario.subtract(salario.multiply(DESCONTO_DE_20));
         }
     }
 
-    private BigDecimal calculaDBA() {
+    private BigDecimal calculaDBA(BigDecimal salario) {
         if (salario.compareTo(SALARIO_BASE_DBA) >= 0) {
             return salario.subtract(salario.multiply(DESCONTO_DE_25));
         } else {
@@ -62,7 +58,7 @@ public class CalculaSalario {
         }
     }
 
-    private BigDecimal calculaTestador() {
+    private BigDecimal calculaTestador(BigDecimal salario) {
         if (salario.compareTo(SALARIO_BASE_TESTADOR) >= 0) {
             return salario.subtract(salario.multiply(DESCONTO_DE_25));
         } else {

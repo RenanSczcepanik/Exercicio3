@@ -10,6 +10,11 @@ public class Funcionario {
     
     public Funcionario() {
     }
+
+    public Funcionario(BigDecimal SALARIO_BASE, String CARGO) {
+        this.SALARIO_BASE = SALARIO_BASE;
+        this.CARGO = CARGO;
+    }
     
     public String getNOME() {
         return NOME;
